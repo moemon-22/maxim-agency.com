@@ -1,352 +1,407 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html class="scroll-smooth" lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAXIM | AI × DX Consulting for Business</title>
-<meta name="description" content="MAXIM（間宮企画）は、クリニック・中小企業向けのAI活用・DX推進コンサルティングを提供します。">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAXIM AGENCY | AI/DX for Your Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#fafaf5",
+        "surface-variant": "#e3e3de",
+        "outline-variant": "#c3c7cb",
+        "on-surface-variant": "#42474b",
+        "on-surface": "#1a1c19",
+        "primary": "#041a25",
+        "primary-container": "#1a2f3a",
+        "secondary": "#43636e",
+        "secondary-container": "#c3e5f3",
+        "on-primary": "#ffffff",
+        "surface-container-high": "#e8e8e3",
+        "teal-accent": "#4a7a78",
+      },
+      fontFamily: {
+        "serif": ["Cormorant Garamond", "serif"],
+        "sans": ["Noto Sans JP", "sans-serif"],
+      },
+      borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+    },
+  },
+}
+</script>
 <style>
-  :root {
-    --primary: #2563eb;
-    --primary-light: #60a5fa;
-    --dark: #0a0a0a;
-    --gray-900: #111;
-    --gray-800: #1a1a1a;
-    --gray-700: #2a2a2a;
-    --gray-400: #999;
-    --gray-300: #bbb;
-    --white: #fff;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-    background: var(--dark);
-    color: var(--white);
-    line-height: 1.8;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ===== Header ===== */
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(10,10,10,0.9);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .header-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo-text {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 6px;
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  nav a {
-    color: var(--gray-400);
-    text-decoration: none;
-    margin-left: 32px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-  }
-
-  nav a:hover { color: var(--white); }
-
-  /* ===== Hero ===== */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 120px 40px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at 50% 30%, rgba(37,99,235,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-logo {
-    font-size: clamp(60px, 10vw, 120px);
-    font-weight: 800;
-    letter-spacing: 16px;
-    margin-bottom: 8px;
-    position: relative;
-  }
-
-  .hero-line {
-    width: 200px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--primary-light));
-    margin: 16px auto;
-    border-radius: 2px;
-  }
-
-  .hero-tagline {
-    font-size: 16px;
-    letter-spacing: 8px;
-    color: var(--gray-400);
-    margin-bottom: 40px;
-    text-transform: uppercase;
-  }
-
-  .hero-description {
-    font-size: 18px;
-    color: var(--gray-300);
-    max-width: 600px;
-    line-height: 2;
-  }
-
-  /* ===== Sections ===== */
-  section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 100px 40px;
-  }
-
-  .section-label {
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: var(--primary-light);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 48px;
-    letter-spacing: 2px;
-  }
-
-  /* ===== Services ===== */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
-  }
-
-  .service-card {
-    background: var(--gray-800);
-    border: 1px solid var(--gray-700);
-    border-radius: 16px;
-    padding: 40px;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .service-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-4px);
-  }
-
-  .service-icon {
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
-
-  .service-card h3 {
-    font-size: 20px;
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-  }
-
-  .service-card p {
-    color: var(--gray-400);
-    font-size: 15px;
-    line-height: 1.8;
-  }
-
-  /* ===== About ===== */
-  .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-
-  .about-text p {
-    color: var(--gray-300);
-    font-size: 15px;
-    margin-bottom: 20px;
-  }
-
-  .about-info {
-    background: var(--gray-800);
-    border: 1px solid var(--gray-700);
-    border-radius: 16px;
-    padding: 40px;
-  }
-
-  .about-info dl {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 16px 20px;
-  }
-
-  .about-info dt {
-    color: var(--gray-400);
-    font-size: 13px;
-    letter-spacing: 1px;
-  }
-
-  .about-info dd {
-    font-size: 15px;
-  }
-
-  /* ===== Contact ===== */
-  .contact-section {
-    text-align: center;
-    padding: 100px 40px;
-    border-top: 1px solid var(--gray-700);
-  }
-
-  .contact-email {
-    font-size: 24px;
-    color: var(--primary-light);
-    text-decoration: none;
-    letter-spacing: 2px;
-    transition: color 0.3s;
-  }
-
-  .contact-email:hover { color: var(--white); }
-
-  /* ===== Footer ===== */
-  footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    color: var(--gray-400);
-    font-size: 13px;
-    letter-spacing: 1px;
-  }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    .header-inner { padding: 16px 20px; }
-    nav { display: none; }
-    .hero { padding: 100px 20px 60px; }
-    .hero-logo { letter-spacing: 8px; }
-    section { padding: 60px 20px; }
-    .about-content { grid-template-columns: 1fr; gap: 32px; }
-    .about-info dl { grid-template-columns: 100px 1fr; gap: 12px 16px; }
-  }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+.glass-card { background: rgba(255,255,255,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  .bounce-arrow { animation: none; }
+}
+@keyframes bounce-arrow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(12px); } }
+.bounce-arrow { animation: bounce-arrow 2s ease-in-out infinite; }
+.mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+.mobile-menu.open { transform: translateX(0); }
+.skip-link { position: absolute; top: -100%; left: 50%; transform: translateX(-50%); z-index: 100; }
+.skip-link:focus { top: 1rem; }
+#mainNav { transition: background 0.4s, border-color 0.4s, box-shadow 0.4s; border-bottom: 1px solid transparent; }
+#mainNav.scrolled { background: rgba(245,245,240,0.95) !important; border-bottom-color: rgba(0,0,0,0.06); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+#mainNav.scrolled .nav-logo-img { filter: brightness(0); }
+#mainNav.scrolled .nav-link { color: #42474b; }
+#mainNav.scrolled .nav-link:hover,
+#mainNav.scrolled .nav-link:focus { color: #1a2f3a; }
+#mainNav.scrolled .nav-cta { background: #1a2f3a; color: white; }
+#mainNav.scrolled .nav-cta:hover { opacity: 0.85; }
+#mainNav.scrolled .nav-hamburger { color: #1a2f3a; }
 </style>
+<noscript><style>.fade-in { opacity: 1; transform: none; }</style></noscript>
 </head>
-<body>
+<body class="bg-surface text-on-surface font-sans antialiased">
 
-<!-- Header -->
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo-text">MAXIM</a>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<!-- Skip Navigation -->
+<a href="#main" class="skip-link bg-white text-primary px-6 py-3 rounded-full font-bold text-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-primary">コンテンツへスキップ</a>
+
+<!-- Navigation -->
+<nav id="mainNav" class="fixed top-0 w-full z-50 bg-[#1a2f3a]/85 backdrop-blur-xl" aria-label="メインナビゲーション">
+  <div class="flex justify-between items-center w-full px-8 py-5 max-w-screen-2xl mx-auto">
+    <a href="#" class="focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-[#1a2f3a] rounded"><img src="logo.png" alt="MAXIM AGENCY" class="nav-logo-img h-6 md:h-7 w-auto transition-[filter] duration-400"></a>
+    <div class="hidden md:flex gap-10 items-center">
+      <a class="nav-link text-white/90 hover:text-white focus:text-white transition-colors font-bold tracking-[0.2em] uppercase text-xs py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#services" lang="en">Services</a>
+      <a class="nav-link text-white/90 hover:text-white focus:text-white transition-colors font-bold tracking-[0.2em] uppercase text-xs py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#process" lang="en">Process</a>
+      <a class="nav-link text-white/90 hover:text-white focus:text-white transition-colors font-bold tracking-[0.2em] uppercase text-xs py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#about" lang="en">About</a>
+      <a class="nav-link text-white/90 hover:text-white focus:text-white transition-colors font-bold tracking-[0.2em] uppercase text-xs py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#contact" lang="en">Contact</a>
+      <a class="nav-cta bg-white text-primary px-8 py-3 rounded-full font-bold tracking-[0.1em] text-xs hover:opacity-80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1a2f3a]" href="#contact">無料相談</a>
+    </div>
+    <button class="md:hidden p-2" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu" id="menuToggle" onclick="toggleMobileMenu(true)">
+      <span class="material-symbols-outlined nav-hamburger text-white cursor-pointer transition-colors duration-400" aria-hidden="true">menu</span>
+    </button>
   </div>
-</header>
-
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-logo">MAXIM</div>
-  <div class="hero-line"></div>
-  <div class="hero-tagline">AI × DX Consulting</div>
-  <p class="hero-description">
-    中小企業・クリニックのためのAI活用・DX推進パートナー。<br>
-    ビジネスの変革を、戦略から実行まで伴走します。
-  </p>
+</nav>
+<div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-[#1a2f3a]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8" role="dialog" aria-modal="true" aria-label="ナビゲーションメニュー">
+  <button class="absolute top-6 right-8 p-2" aria-label="メニューを閉じる" onclick="toggleMobileMenu(false)">
+    <span class="material-symbols-outlined text-white text-3xl" aria-hidden="true">close</span>
+  </button>
+  <a class="text-white text-lg tracking-[0.2em] uppercase py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#services" onclick="toggleMobileMenu(false)" lang="en">Services</a>
+  <a class="text-white text-lg tracking-[0.2em] uppercase py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#process" onclick="toggleMobileMenu(false)" lang="en">Process</a>
+  <a class="text-white text-lg tracking-[0.2em] uppercase py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#about" onclick="toggleMobileMenu(false)" lang="en">About</a>
+  <a class="text-white text-lg tracking-[0.2em] uppercase py-2 focus:outline-none focus:ring-2 focus:ring-white/60 rounded" href="#contact" onclick="toggleMobileMenu(false)" lang="en">Contact</a>
+  <a class="bg-white text-primary px-10 py-4 rounded-full font-bold tracking-[0.15em] mt-4 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#1a2f3a]" href="#contact" onclick="toggleMobileMenu(false)">無料相談</a>
 </div>
 
+<main id="main">
+
+<!-- Hero Layer 1: Logo (100vh) — 写真背景 -->
+<section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" aria-label="メインビジュアル">
+  <div class="absolute inset-0">
+    <img src="n1ce-2IAr_b34820-unsplash.jpg" alt="" aria-hidden="true"
+         class="w-full h-full object-cover object-[center_20%]" />
+    <div class="absolute inset-0" style="background: linear-gradient(180deg,
+      rgba(26,47,58,0.55) 0%,
+      rgba(42,74,85,0.30) 40%,
+      rgba(42,74,85,0.25) 100%
+    );"></div>
+  </div>
+  <div class="relative z-10 text-center px-8">
+    <h1><img src="logo.png" alt="MAXIM AGENCY" class="h-20 md:h-32 lg:h-36 w-auto mx-auto"></h1>
+    <div class="w-[60px] h-[1px] bg-white/35 mx-auto mt-6" aria-hidden="true"></div>
+    <p class="text-white/80 font-sans text-sm mt-6 max-w-md mx-auto">中小企業・個人事業主のためのAI導入・DX推進パートナー</p>
+  </div>
+  <div class="absolute bottom-10 bounce-arrow">
+    <span class="material-symbols-outlined text-white/70 text-3xl" aria-hidden="true">keyboard_arrow_down</span>
+  </div>
+</section>
+
+<!-- Hero Layer 2: Catchcopy + CTA -->
+<section class="relative py-20 md:py-[140px] bg-[#f5f5f0] overflow-hidden">
+  <div class="relative z-10 max-w-5xl mx-auto px-8 text-center md:text-left fade-in">
+    <span class="text-xs font-bold tracking-[0.3em] uppercase text-teal-accent mb-6 block" lang="en">— For Business Owners</span>
+    <h2 class="font-serif leading-tight mb-12 text-[32px] md:text-[56px] lg:text-[64px] tracking-tight text-primary" style="text-wrap: balance;">
+      AIの導入、<br/>
+      何から始めればいい？
+    </h2>
+    <p class="text-primary font-serif text-[24px] md:text-[40px] lg:text-[48px] mb-10 leading-tight tracking-tight max-w-4xl">経営者目線で、AI導入から定着まで伴走します。</p>
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+      <a class="bg-primary text-white px-10 py-5 rounded-full font-bold tracking-[0.15em] text-sm flex items-center gap-3 transition-transform duration-200 active:scale-95 shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#f5f5f0]" href="#contact">
+        無料相談を予約する
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </a>
+      <div class="text-on-surface-variant/70 text-sm tracking-widest font-sans md:self-center">オンライン / 30分 / 無料</div>
+    </div>
+    <p class="text-sm text-on-surface-variant/60 mt-4">※ デジタル化・AI導入補助金の活用もご相談いただけます</p>
+  </div>
+</section>
+
+<!-- Challenges -->
+<section class="py-16 md:py-[120px] bg-[#f5f5f0]" id="challenges">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="mb-20 text-center md:text-left fade-in">
+      <span class="text-xs font-bold tracking-[0.3em] uppercase text-secondary mb-4 block" lang="en">CHALLENGES</span>
+      <h2 class="font-serif text-[32px] md:text-[48px] text-primary">こんな課題、抱えていませんか？</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="glass-card p-10 md:p-12 rounded-xl flex flex-col gap-6 hover:translate-y-[-8px] focus-within:translate-y-[-8px] transition-transform duration-500 fade-in">
+        <span class="material-symbols-outlined text-secondary text-4xl" aria-hidden="true">lightbulb</span>
+        <div>
+          <h3 class="font-sans font-bold text-xl mb-4 text-primary">AIを使いたいが、何から手をつければいいかわからない</h3>
+          <p class="text-on-surface-variant leading-relaxed font-sans">ツールが多すぎて選べない。導入しても定着しない。</p>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-12 rounded-xl flex flex-col gap-6 hover:translate-y-[-8px] focus-within:translate-y-[-8px] transition-transform duration-500 fade-in">
+        <span class="material-symbols-outlined text-secondary text-4xl" aria-hidden="true">description</span>
+        <div>
+          <h3 class="font-sans font-bold text-xl mb-4 text-primary">業務のデジタル化が進まず、手作業が残っている</h3>
+          <p class="text-on-surface-variant leading-relaxed font-sans">Excel転記、紙の管理、属人化した業務フロー。</p>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-12 rounded-xl flex flex-col gap-6 hover:translate-y-[-8px] focus-within:translate-y-[-8px] transition-transform duration-500 fade-in">
+        <span class="material-symbols-outlined text-secondary text-4xl" aria-hidden="true">help</span>
+        <div>
+          <h3 class="font-sans font-bold text-xl mb-4 text-primary">DXを外注したいが、相談先がわからない</h3>
+          <p class="text-on-surface-variant leading-relaxed font-sans">大手コンサルは高すぎる。IT企業は技術寄りで経営がわからない。</p>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-12 rounded-xl flex flex-col gap-6 hover:translate-y-[-8px] focus-within:translate-y-[-8px] transition-transform duration-500 fade-in">
+        <span class="material-symbols-outlined text-secondary text-4xl" aria-hidden="true">refresh</span>
+        <div>
+          <h3 class="font-sans font-bold text-xl mb-4 text-primary">導入しても、社内で使いこなせない</h3>
+          <p class="text-on-surface-variant leading-relaxed font-sans">ツールを入れただけで終わり。研修も引き継ぎもなかった。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Approach -->
+<section class="py-16 md:py-[120px] bg-white overflow-hidden" id="approach">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="mb-16 md:mb-24 text-center max-w-3xl mx-auto fade-in">
+      <span class="text-xs font-bold tracking-[0.3em] uppercase text-secondary mb-4 block" lang="en">OUR APPROACH</span>
+      <h2 class="font-serif text-[32px] md:text-[48px] text-primary mb-10 leading-tight">経営者目線のAI/DXパートナー。</h2>
+      <div class="text-lg text-on-surface-variant leading-relaxed font-sans space-y-4">
+        <p>MAXIM AGENCYは、大手広告代理店でのマーケティング経験と、建設会社での経営・DX推進の実体験を持つコンサルタントが、あなたのビジネスに最適なAI/DX戦略を設計・実行します。</p>
+        <p>技術だけでなく、経営者として現場を動かしてきた人間が伴走するから、机上の空論で終わりません。</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+      <div class="relative pt-16 fade-in">
+        <div class="absolute top-0 left-0 font-serif text-[120px] leading-none text-outline-variant/20 select-none" aria-hidden="true">01.</div>
+        <div class="relative z-10 flex flex-col gap-6">
+          <span class="material-symbols-outlined text-secondary text-3xl" aria-hidden="true">hearing</span>
+          <h3 class="font-sans font-bold text-2xl text-primary">徹底したヒアリング</h3>
+          <p class="text-on-surface-variant font-sans leading-loose">現状の業務フローを丁寧にヒアリング。「何を・どこから・どう変えるか」を一緒に設計します。闇雲なツール導入はしません。</p>
+        </div>
+      </div>
+      <div class="relative pt-16 fade-in">
+        <div class="absolute top-0 left-0 font-serif text-[120px] leading-none text-outline-variant/20 select-none" aria-hidden="true">02.</div>
+        <div class="relative z-10 flex flex-col gap-6">
+          <span class="material-symbols-outlined text-secondary text-3xl" aria-hidden="true">handshake</span>
+          <h3 class="font-sans font-bold text-2xl text-primary">実行までの伴走型支援</h3>
+          <p class="text-on-surface-variant font-sans leading-loose">ツール選定・セットアップ・スタッフ研修・運用引き継ぎ。「入れて終わり」ではなく、チームが自走できる状態を目指します。</p>
+        </div>
+      </div>
+      <div class="relative pt-16 fade-in">
+        <div class="absolute top-0 left-0 font-serif text-[120px] leading-none text-outline-variant/20 select-none" aria-hidden="true">03.</div>
+        <div class="relative z-10 flex flex-col gap-6">
+          <span class="material-symbols-outlined text-secondary text-3xl" aria-hidden="true">trending_up</span>
+          <h3 class="font-sans font-bold text-2xl text-primary">経営者目線での課題解決</h3>
+          <p class="text-on-surface-variant font-sans leading-loose">技術用語ではなく、売上・コスト・時間の言葉で提案します。広告代理店と建設会社で培った、現場感覚のあるコンサルティング。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Services -->
-<section id="services">
-  <p class="section-label">Services</p>
-  <h2 class="section-title">事業内容</h2>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">&#9670;</div>
-      <h3>AI導入コンサルティング</h3>
-      <p>業務分析からAIツール選定・導入・運用定着まで。ChatGPT、画像生成AI、業務自動化など、貴社に最適なAI活用戦略を設計します。</p>
+<section class="py-16 md:py-[120px] bg-[#f5f5f0]" id="services">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="flex flex-col md:flex-row md:justify-between items-end mb-20 gap-8 fade-in">
+      <div>
+        <span class="text-xs font-bold tracking-[0.3em] uppercase text-secondary mb-4 block" lang="en">SERVICES</span>
+        <h2 class="font-serif text-[32px] md:text-[48px] text-primary">提供サービス</h2>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-icon">&#9671;</div>
-      <h3>DX推進支援</h3>
-      <p>紙・FAX・電話中心の業務フローをデジタル化。予約システム、顧客管理、会計連携など、段階的なDX推進をサポートします。</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="glass-card p-10 md:p-12 rounded-lg group hover:bg-white/80 focus-within:bg-white/80 transition-all duration-500 fade-in">
+        <div class="flex items-start gap-8">
+          <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">psychology</span></div>
+          <div>
+            <h3 class="font-sans font-bold text-xl mb-4 text-primary">AI導入コンサルティング</h3>
+            <p class="text-on-surface-variant leading-relaxed">業務分析 → AI活用ポイントの特定 → ツール選定 → 導入設計。ChatGPT、生成AI、AIエージェント等、最適な技術を中立的にご提案。</p>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-12 rounded-lg group hover:bg-white/80 focus-within:bg-white/80 transition-all duration-500 fade-in">
+        <div class="flex items-start gap-8">
+          <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">workflow</span></div>
+          <div>
+            <h3 class="font-sans font-bold text-xl mb-4 text-primary">DX推進・業務改善</h3>
+            <p class="text-on-surface-variant leading-relaxed">紙の業務、Excel管理、属人化した業務フローをデジタル化。SaaS選定から導入・運用定着までワンストップで支援します。</p>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-12 rounded-lg group hover:bg-white/80 focus-within:bg-white/80 transition-all duration-500 fade-in">
+        <div class="flex items-start gap-8">
+          <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">public</span></div>
+          <div>
+            <h3 class="font-sans font-bold text-xl mb-4 text-primary">Webサイト制作・リニューアル</h3>
+            <p class="text-on-surface-variant leading-relaxed">モバイルファースト設計、SEO最適化、問い合わせ導線設計。事業の強みを伝えるサイトを制作・納品します。</p>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card p-10 md:p-12 rounded-lg group hover:bg-white/80 focus-within:bg-white/80 transition-all duration-500 fade-in">
+        <div class="flex items-start gap-8">
+          <div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">school</span></div>
+          <div>
+            <h3 class="font-sans font-bold text-xl mb-4 text-primary">DX/AI研修</h3>
+            <p class="text-on-surface-variant leading-relaxed">経営者・スタッフ向けの実践型研修。「AIって何？」の段階から、業務で使えるレベルまで。単独でのお申し込みも可能です。</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-icon">&#9672;</div>
-      <h3>クリニック特化支援</h3>
-      <p>医療・歯科クリニック向けのAI活用支援。患者対応の効率化、SNSマーケティング、院内DXの包括的なコンサルティングを提供します。</p>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="py-16 md:py-[120px] bg-white overflow-x-hidden" id="process">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="mb-20 text-center fade-in">
+      <span class="text-xs font-bold tracking-[0.3em] uppercase text-secondary mb-4 block" lang="en">PROCESS</span>
+      <h2 class="font-serif text-[32px] md:text-[48px] text-primary">導入までの流れ</h2>
+    </div>
+    <div class="relative py-12 md:py-20">
+      <div class="absolute top-1/2 left-0 w-full h-[1px] bg-outline-variant/30 hidden lg:block" aria-hidden="true"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-6 lg:gap-4 relative z-10">
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-6 fade-in">
+          <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-serif text-lg z-20" aria-hidden="true">01.</div>
+          <div><h3 class="font-bold text-primary mb-2">無料相談</h3><p class="text-sm text-on-surface-variant">30分・オンライン。現在の課題やお悩みをヒアリング。AI/DXで改善できるポイントを整理します。</p></div>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-6 fade-in">
+          <div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant text-primary flex items-center justify-center font-serif text-lg z-20" aria-hidden="true">02.</div>
+          <div><h3 class="font-bold text-primary mb-2">現状分析・ご提案</h3><p class="text-sm text-on-surface-variant">1〜2週間。業務フローを分析し、最適なAI/DX戦略とロードマップをご提案。お見積りもこの段階で。</p></div>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-6 fade-in">
+          <div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant text-primary flex items-center justify-center font-serif text-lg z-20" aria-hidden="true">03.</div>
+          <div><h3 class="font-bold text-primary mb-2">ご契約・キックオフ</h3><p class="text-sm text-on-surface-variant">ゴールとスケジュールを合意。プロジェクト開始。</p></div>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-6 fade-in">
+          <div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant text-primary flex items-center justify-center font-serif text-lg z-20" aria-hidden="true">04.</div>
+          <div><h3 class="font-bold text-primary mb-2">導入・構築</h3><p class="text-sm text-on-surface-variant">ツール導入、システム構築、コンテンツ制作。途中経過を随時共有します。</p></div>
+        </div>
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-6 fade-in">
+          <div class="w-12 h-12 rounded-full bg-[#1a2f3a] text-white flex items-center justify-center font-serif text-lg z-20"><span class="material-symbols-outlined" aria-hidden="true">check_circle</span></div>
+          <div><h3 class="font-bold text-primary mb-2">研修・引き継ぎ</h3><p class="text-sm text-on-surface-variant">スタッフ研修と運用引き継ぎ。チームが自走できる体制を作ってお渡しします。</p></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- About -->
-<section id="about">
-  <p class="section-label">About</p>
-  <h2 class="section-title">MAXIMについて</h2>
-  <div class="about-content">
-    <div class="about-text">
-      <p>MAXIMは、AI・DXの力で中小企業やクリニックの未来を拓くコンサルティングファームです。</p>
-      <p>大手広告代理店での戦略立案・クリエイティブディレクション経験と、建設業界での経営実務経験を活かし、「現場がわかるAIコンサルタント」として、戦略策定から実行・定着まで伴走します。</p>
-      <p>テクノロジーの波に乗り遅れることなく、すべてのビジネスがその可能性を最大限に発揮できるよう支援します。</p>
-    </div>
-    <div class="about-info">
-      <dl>
-        <dt>屋号</dt>
-        <dd>間宮企画</dd>
-        <dt>ブランド名</dt>
-        <dd>MAXIM</dd>
-        <dt>代表</dt>
-        <dd>間宮 大樹</dd>
-        <dt>設立</dt>
-        <dd>2026年4月</dd>
-        <dt>所在地</dt>
-        <dd>東京都港区</dd>
-        <dt>事業内容</dt>
-        <dd>AI活用・DX推進コンサルティング</dd>
-        <dt>Web</dt>
-        <dd>maxim-agency.com</dd>
-      </dl>
+<section class="py-16 md:py-[120px] bg-[#f5f5f0]" id="about">
+  <div class="max-w-7xl mx-auto px-8">
+    <div>
+      <div class="fade-in">
+        <span class="text-xs font-bold tracking-[0.3em] uppercase text-secondary mb-4 block" lang="en">ABOUT</span>
+        <h2 class="font-serif text-[32px] md:text-[48px] text-primary mb-12">MAXIMについて</h2>
+        <div class="space-y-6 text-on-surface-variant leading-loose font-sans text-base md:text-lg max-w-2xl">
+          <p>広告・マーケ × 経営 × テクノロジー。<br/>3つのフィールドを横断してきた、異色のAI/DXコンサルタント。</p>
+          <p>大手総合広告代理店にて、大手飲料メーカー・大手素材メーカーなどのナショナルクライアントを主担当。マーケティング戦略・メディアプランニングの最前線を経験。</p>
+          <p>その後、家業の会社を継ぎ、6年間取締役として、全社的な経営改革を主導。SaaS導入・業務システム開発・DX推進に自ら着手し、事業成果の改善を実現。</p>
+          <p>2026年、AI/DXコンサルティング事業として独立。「経営者として現場を動かしてきた」実体験をベースに、中小企業・個人事業主のデジタル変革を支援しています。</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Contact -->
-<div class="contact-section" id="contact">
-  <p class="section-label">Contact</p>
-  <h2 class="section-title">お問い合わせ</h2>
-  <p style="color: var(--gray-400); margin-bottom: 32px;">
-    AI・DXに関するご相談はお気軽にご連絡ください。
-  </p>
-  <a href="mailto:info@maxim-agency.com" class="contact-email">info@maxim-agency.com</a>
-</div>
+<!-- Contact — 写真背景 -->
+<section class="relative py-20 md:py-[160px] overflow-hidden" id="contact">
+  <div class="absolute inset-0">
+    <img src="n1ce-2IAr_b34820-unsplash.jpg" alt="" aria-hidden="true"
+         class="w-full h-full object-cover object-[center_40%]" />
+    <div class="absolute inset-0" style="background: linear-gradient(180deg,
+      rgba(26,47,58,0.65) 0%,
+      rgba(26,47,58,0.70) 50%,
+      rgba(26,47,58,0.80) 100%
+    );"></div>
+  </div>
+  <div class="relative z-10 max-w-4xl mx-auto px-8 text-center fade-in">
+    <h2 class="font-serif text-[36px] md:text-[56px] text-white mb-8">まずは無料相談から。</h2>
+    <p class="text-white/85 font-sans text-base md:text-lg mb-4 leading-relaxed">
+      AIやDXの導入について、漠然とした悩みでも構いません。<br/>
+      30分のオンライン面談で、あなたのビジネスの課題と<br class="hidden md:inline"/>
+      改善の方向性を一緒に整理します。<br/>
+      無理な営業は一切いたしません。
+    </p>
+    <p class="text-white/60 text-sm mt-2 mb-8 font-sans">※ 2026年6月の本格稼働に先駆けて、事前のご相談を承っています。</p>
+    <div class="flex flex-col items-center gap-6">
+      <a class="px-12 md:px-16 py-5 md:py-6 rounded-full font-bold tracking-[0.2em] text-base md:text-lg transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-[#1a2f3a] text-white border border-white/30 bg-white/[0.06] backdrop-blur-[10px] hover:bg-white/[0.12]" href="mailto:info@maxim-agency.com">無料相談を予約する</a>
+      <p class="text-white/75 text-xs tracking-widest font-sans">オンライン / 30分 / 無料 / 営業なし</p>
+    </div>
+    <p class="text-white/75 text-sm mt-8 font-sans">メールでのお問い合わせ: <a href="mailto:info@maxim-agency.com" class="underline hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 rounded">info@maxim-agency.com</a></p>
+  </div>
+</section>
+
+</main>
 
 <!-- Footer -->
-<footer>
-  &copy; 2026 MAXIM / 間宮企画. All rights reserved.
+<footer class="bg-[#1a2f3a] text-white py-12 px-8">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+    <div><img src="logo.png" alt="MAXIM AGENCY" class="h-5 w-auto"></div>
+    <div class="text-sm font-sans tracking-tight text-white/90"><a href="mailto:info@maxim-agency.com" class="hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 rounded">info@maxim-agency.com</a></div>
+    <div class="text-[11px] text-white/60 tracking-widest uppercase text-center md:text-right">&copy; 2026 MAXIM AGENCY / 間宮企画</div>
+  </div>
 </footer>
 
+<!-- Scripts -->
+<script>
+// Mobile menu
+function toggleMobileMenu(open) {
+  const menu = document.getElementById('mobileMenu');
+  const toggle = document.getElementById('menuToggle');
+  if (open) {
+    menu.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => menu.querySelector('a')?.focus(), 300);
+  } else {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggle.focus();
+  }
+}
+
+// Close mobile menu on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('mobileMenu').classList.contains('open')) {
+    toggleMobileMenu(false);
+  }
+});
+
+// Nav scroll color change
+const nav = document.getElementById('mainNav');
+const hero = document.querySelector('[aria-label="メインビジュアル"]');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    nav.classList.toggle('scrolled', !entry.isIntersecting);
+  });
+}, { threshold: 0.1 });
+navObserver.observe(hero);
+
+// Scroll animation with IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
