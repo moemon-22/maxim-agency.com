@@ -616,7 +616,10 @@ img { display: block; max-width: 100%; }
 <!-- Hero: Logo + Water Photo -->
 <section class="hero" aria-label="メインビジュアル">
   <div class="hero-bg">
-    <img src="n1ce-2IAr_b34820-unsplash.jpg" alt="" aria-hidden="true" />
+    <picture>
+      <source srcset="hero-768.webp 768w, hero-1280.webp 1280w, hero-1920.webp 1920w" type="image/webp" sizes="100vw">
+      <img src="hero-1280.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high">
+    </picture>
     <div class="hero-bg-overlay"></div>
   </div>
   <div class="hero-content">
@@ -819,7 +822,10 @@ img { display: block; max-width: 100%; }
 <!-- Contact -->
 <section class="contact" id="contact">
   <div class="contact-bg">
-    <img src="n1ce-2IAr_b34820-unsplash.jpg" alt="" aria-hidden="true" />
+    <picture>
+      <source srcset="hero-768.webp 768w, hero-1280.webp 1280w, hero-1920.webp 1920w" type="image/webp" sizes="100vw">
+      <img src="hero-1280.jpg" alt="" aria-hidden="true" loading="lazy">
+    </picture>
     <div class="contact-bg-overlay"></div>
   </div>
   <div class="container contact-inner fade-in">
