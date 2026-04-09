@@ -579,6 +579,91 @@ img { display: block; max-width: 100%; }
 }
 .contact-email a:hover { color: #fff; }
 
+/* --- Mid CTA Banner --- */
+.cta-banner {
+  background: var(--bg-light-alt);
+  text-align: center;
+  padding: 64px 0;
+}
+.cta-banner h2 {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 500; color: var(--text-dark-primary);
+  margin-bottom: 12px; letter-spacing: -0.3px;
+}
+.cta-banner p {
+  font-size: 15px; color: var(--text-dark-tertiary);
+  margin-bottom: 24px;
+}
+
+/* --- Contact Form --- */
+.contact-form {
+  max-width: 480px; margin: 0 auto; text-align: left;
+}
+.contact-form .form-group { margin-bottom: 16px; }
+.contact-form label {
+  display: block; font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.7); margin-bottom: 6px;
+}
+.contact-form label .optional {
+  font-weight: 400; color: rgba(255,255,255,0.4);
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%; padding: 12px 14px;
+  font-size: 15px; font-family: inherit;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  color: #fff; outline: none;
+  transition: border-color 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+.contact-form textarea { resize: vertical; min-height: 100px; }
+.contact-form .btn-primary {
+  width: 100%; justify-content: center;
+  padding: 16px; font-size: 16px; margin-top: 8px;
+}
+.contact-form .form-note {
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  text-align: center; margin-top: 12px;
+}
+.form-thanks {
+  text-align: center; padding: 40px 0;
+}
+.form-thanks .check {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(74,158,154,0.2);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.form-thanks h3 {
+  font-size: 20px; font-weight: 500; color: #fff; margin-bottom: 8px;
+}
+.form-thanks p { font-size: 14px; color: rgba(255,255,255,0.6); }
+
+/* --- Mobile Floating CTA --- */
+.mobile-cta {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 45;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-light);
+  padding: 10px 16px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.mobile-cta.visible { transform: translateY(0); }
+@media (max-width: 768px) { .mobile-cta { display: block; } }
+.mobile-cta .btn-primary {
+  width: 100%; justify-content: center; padding: 14px; font-size: 15px;
+}
+
 /* --- Footer --- */
 .footer {
   background: #1A1A2E;
@@ -710,7 +795,7 @@ img { display: block; max-width: 100%; }
     <h2 class="display-xl">AIの導入、<br/>何から始めればいい？</h2>
     <p class="body-lg">経営者目線で、AI導入から定着まで伴走します。</p>
     <div class="cta-group">
-      <a class="btn-primary" href="#contact">
+      <a class="btn-primary" href="#contact" data-cta-location="hero">
         無料相談を予約する
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -829,6 +914,18 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
+<!-- Mid CTA (after Services) -->
+<div class="cta-banner fade-in">
+  <div class="container">
+    <h2>あなたのビジネスに最適なAI活用法を、一緒に見つけませんか？</h2>
+    <p>30分の無料相談で、課題と改善の方向性を整理します。</p>
+    <a class="btn-primary" href="#contact" data-cta-location="mid-services">
+      無料相談を予約する
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
 <!-- Process -->
 <section class="section process section-light" id="process">
   <div class="container">
@@ -892,6 +989,18 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
+<!-- Mid CTA (after About) -->
+<div class="cta-banner fade-in" style="background:var(--bg-light);">
+  <div class="container">
+    <h2>まずは気軽にお話ししませんか？</h2>
+    <p>漠然とした悩みでもOK。無理な営業は一切いたしません。</p>
+    <a class="btn-primary" href="#contact" data-cta-location="mid-about">
+      無料相談を予約する
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
 <!-- Contact -->
 <section class="contact" id="contact">
   <div class="contact-bg">
@@ -904,14 +1013,50 @@ img { display: block; max-width: 100%; }
   <div class="container contact-inner fade-in">
     <h2 class="display">まずは無料相談から。</h2>
     <p class="body">AIやDXの導入について、漠然とした悩みでも構いません。<br/>30分のオンライン面談で、あなたのビジネスの課題と改善の方向性を一緒に整理します。<br/>無理な営業は一切いたしません。</p>
-    <p class="body-sm">※ 2026年6月の本格稼働に先駆けて、事前のご相談を承っています。</p>
-    <a class="btn-primary" href="mailto:info@maxim-agency.com" style="padding:16px 40px;font-size:16px;">無料相談を予約する</a>
-    <p class="contact-meta">オンライン / 30分 / 無料 / 営業なし</p>
+    <p class="body-sm" style="margin-bottom:32px;">※ 2026年6月の本格稼働に先駆けて、事前のご相談を承っています。</p>
+
+    <form class="contact-form" id="contactForm" data-cta-location="contact">
+      <div class="form-group">
+        <label>お名前 <span style="color:#E8927C;">*</span></label>
+        <input type="text" name="name" required placeholder="山田 太郎">
+      </div>
+      <div class="form-group">
+        <label>メールアドレス <span style="color:#E8927C;">*</span></label>
+        <input type="email" name="email" required placeholder="info@example.com">
+      </div>
+      <div class="form-group">
+        <label>会社名・屋号 <span class="optional">（任意）</span></label>
+        <input type="text" name="company" placeholder="株式会社○○ / ○○クリニック">
+      </div>
+      <div class="form-group">
+        <label>ご相談内容</label>
+        <textarea name="message" placeholder="現在のお悩みや、ご相談されたい内容をお気軽にどうぞ"></textarea>
+      </div>
+      <button type="submit" class="btn-primary">
+        無料相談を申し込む
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <p class="form-note">オンライン / 30分 / 無料 / 営業なし</p>
+    </form>
+
+    <div class="form-thanks" id="formThanks" style="display:none;">
+      <div class="check">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>お申し込みありがとうございます</h3>
+      <p>2営業日以内にメールにてご連絡いたします。</p>
+    </div>
+
     <p class="contact-email">メールでのお問い合わせ: <a href="mailto:info@maxim-agency.com">info@maxim-agency.com</a></p>
   </div>
 </section>
 
 </main>
+
+<!-- Mobile Floating CTA -->
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn-primary" href="#contact" data-cta-location="mobile-float">無料相談を予約する</a>
+</div>
 
 <!-- Footer -->
 <footer class="footer">
@@ -1013,6 +1158,26 @@ if (!prefersReducedMotion) {
       ticking = true;
     }
   }, { passive: true });
+}
+
+// Contact form submission (demo — shows thanks, no backend yet)
+const contactForm = document.getElementById('contactForm');
+const formThanks = document.getElementById('formThanks');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    contactForm.style.display = 'none';
+    formThanks.style.display = 'block';
+  });
+}
+
+// Mobile floating CTA: show after scrolling past hero
+const mobileCta = document.getElementById('mobileCta');
+if (mobileCta) {
+  const mobileCtaObs = new IntersectionObserver(entries => {
+    entries.forEach(e => mobileCta.classList.toggle('visible', !e.isIntersecting));
+  }, { threshold: 0.05 });
+  mobileCtaObs.observe(heroEl);
 }
 </script>
 
