@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maxim-agency.com/sitemap.xml
