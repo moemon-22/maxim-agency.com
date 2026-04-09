@@ -1,4 +1,6 @@
 .DS_Store
+.vercel/
+node_modules/
 cursor-prompt.md
 cursor-fix-hero.md
 stitch-prompt.md
