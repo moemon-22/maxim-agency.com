@@ -3,6 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1SFV9Q998X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1SFV9Q998X');
+</script>
 <title>MAXIM AGENCY | 中小企業のためのAI導入・DX推進パートナー</title>
 <meta name="description" content="MAXIM AGENCY — 中小企業・個人事業主のためのAI導入・DX推進パートナー。経営者目線で、AI導入から定着まで伴走します。東京都港区。">
 <link rel="canonical" href="https://maxim-agency.com/">
@@ -751,7 +760,7 @@ img { display: block; max-width: 100%; }
       <a class="nav-link" href="#process">Process</a>
       <a class="nav-link" href="#about">About</a>
       <a class="nav-link" href="#contact">Contact</a>
-      <a class="nav-cta" href="#contact">無料相談</a>
+      <a class="nav-cta" href="#contact" data-cta-location="nav">無料相談</a>
     </div>
     <button class="nav-hamburger" id="menuToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -766,7 +775,7 @@ img { display: block; max-width: 100%; }
   <a href="#process" onclick="toggleMobile(false)">Process</a>
   <a href="#about" onclick="toggleMobile(false)">About</a>
   <a href="#contact" onclick="toggleMobile(false)">Contact</a>
-  <a class="btn-primary" href="#contact" onclick="toggleMobile(false)" style="margin-top:16px;">無料相談</a>
+  <a class="btn-primary" href="#contact" onclick="toggleMobile(false)" data-cta-location="mobile-menu" style="margin-top:16px;">無料相談</a>
 </div>
 
 <main id="main">
@@ -1177,6 +1186,9 @@ if (contactForm) {
       message: data.get('message')
     };
 
+    // GA4: form submit tracking
+    gtag('event', 'form_submit', { location: 'contact' });
+
     // Formspreeに送信
     fetch(contactForm.action, {
       method: 'POST',
@@ -1201,6 +1213,14 @@ if (contactForm) {
     }).catch(() => {});
   });
 }
+
+// GA4: CTA click tracking
+document.querySelectorAll('[data-cta-location]').forEach(el => {
+  if (el.tagName === 'FORM') return;
+  el.addEventListener('click', function() {
+    gtag('event', 'cta_click', { location: this.dataset.ctaLocation });
+  });
+});
 
 // Mobile floating CTA: show after scrolling past hero
 const mobileCta = document.getElementById('mobileCta');
