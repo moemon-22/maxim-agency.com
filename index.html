@@ -1015,7 +1015,9 @@ img { display: block; max-width: 100%; }
     <p class="body">AIやDXの導入について、漠然とした悩みでも構いません。<br/>30分のオンライン面談で、あなたのビジネスの課題と改善の方向性を一緒に整理します。<br/>無理な営業は一切いたしません。</p>
     <p class="body-sm" style="margin-bottom:32px;">※ 2026年6月の本格稼働に先駆けて、事前のご相談を承っています。</p>
 
-    <form class="contact-form" id="contactForm" data-cta-location="contact">
+    <form class="contact-form" id="contactForm" data-cta-location="contact" action="https://formspree.io/f/xnjoyzle" method="POST">
+      <input type="hidden" name="_subject" value="MAXIM AGENCY 無料相談のお申し込み">
+      <input type="text" name="_gotcha" style="display:none">
       <div class="form-group">
         <label>お名前 <span style="color:#E8927C;">*</span></label>
         <input type="text" name="name" required placeholder="山田 太郎">
@@ -1160,14 +1162,27 @@ if (!prefersReducedMotion) {
   }, { passive: true });
 }
 
-// Contact form submission (demo — shows thanks, no backend yet)
+// Contact form submission via Formspree (AJAX)
 const contactForm = document.getElementById('contactForm');
 const formThanks = document.getElementById('formThanks');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    contactForm.style.display = 'none';
-    formThanks.style.display = 'block';
+    const data = new FormData(contactForm);
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        contactForm.style.display = 'none';
+        formThanks.style.display = 'block';
+      } else {
+        alert('送信に失敗しました。お手数ですがメールにてお問い合わせください。');
+      }
+    }).catch(() => {
+      alert('送信に失敗しました。お手数ですがメールにてお問い合わせください。');
+    });
   });
 }
 
