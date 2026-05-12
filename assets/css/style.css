@@ -390,6 +390,14 @@ a:hover {
     display: inline-flex;
   }
 
+  /* メニュー open 時もロゴ・× ボタンを前面に維持
+     (.nav-links が z-index 90 で viewport 全体を覆うため) */
+  .nav-logo,
+  .nav-toggle {
+    position: relative;
+    z-index: 95;
+  }
+
   /* ナビ上部もメニュー開時にダーク化 (nav は z-index 100 でメニュー上に常駐) */
   .nav.menu-open {
     background-color: var(--color-bg-deep);
