@@ -392,7 +392,13 @@ a:hover {
 
   .nav-links {
     position: fixed;
-    inset: var(--nav-height) 0 0 0;
+    top: var(--nav-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
     flex-direction: column;
     background-color: var(--color-bg);
     padding: var(--space-lg) var(--space-md);
@@ -400,6 +406,8 @@ a:hover {
     transform: translateX(100%);
     transition: transform var(--transition);
     align-items: flex-start;
+    z-index: 99;
+    overflow-y: auto;
   }
 
   .nav-links[data-open="true"] {
@@ -529,6 +537,13 @@ a:hover {
   margin-top: calc(var(--nav-height) * -1);
   padding-top: var(--nav-height);
   color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+  .hero-photo {
+    min-height: 70vh;
+    min-height: 70dvh;
+  }
 }
 
 .hero-photo-bg {
@@ -746,6 +761,9 @@ a:hover {
 @media (min-width: 768px) {
   .concept-headline {
     white-space: nowrap;
+  }
+  .break-mobile {
+    display: none;
   }
 }
 
