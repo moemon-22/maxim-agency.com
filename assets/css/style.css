@@ -883,9 +883,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: clamp(220px, 28vw, 300px);
   color: var(--color-text-light);
-  background-color: var(--color-bg-deep);
+  background-color: #0A0A0C;
 }
 
 .home-service-card-bg {
@@ -893,6 +892,12 @@ a:hover {
   inset: 0;
   z-index: 0;
   overflow: hidden;
+}
+
+.home-service-card-bg picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .home-service-card-bg img {
@@ -913,19 +918,31 @@ a:hover {
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.60) 0%,
-    rgba(0, 0, 0, 0.35) 50%,
-    rgba(0, 0, 0, 0.12) 100%
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.35) 35%,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(0, 0, 0, 0) 100%
   );
 }
 
 .home-service-card-body {
   position: relative;
   z-index: 2;
-  padding: clamp(28px, 4vw, 44px) var(--space-lg) var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+/* モバイル: 軽い zoom で画像を枠内いっぱいに見せる */
+@media (max-width: 768px) {
+  .home-service-card-bg img {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+  .home-service-card:hover .home-service-card-bg img {
+    transform: scale(1.2);
+  }
 }
 
 .home-service-card-body .section-label {
