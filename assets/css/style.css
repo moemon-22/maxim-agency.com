@@ -385,20 +385,15 @@ a:hover {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* モバイルメニューフッター (デスクトップでは非表示) */
-.nav-menu-footer {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .nav-toggle {
     display: inline-flex;
   }
 
-  /* ナビ上部もメニュー開時にダーク化 */
+  /* ナビ上部もメニュー開時にダーク化 (nav は z-index 100 でメニュー上に常駐) */
   .nav.menu-open {
     background-color: var(--color-bg-deep);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: transparent;
   }
 
   .nav.menu-open .nav-logo .logo-default {
@@ -415,33 +410,27 @@ a:hover {
     background-color: var(--color-text-light);
   }
 
-  /* ダーク・フルスクリーン メニュー */
+  /* ダーク・フルスクリーン メニュー (iOS Safari sticky 親バグ回避のため
+     viewport 全体に inset:0 で展開、nav 高さは padding-top で確保) */
   .nav-links {
     position: fixed;
-    top: var(--nav-height);
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     width: 100vw;
-    height: calc(100vh - var(--nav-height));
-    height: calc(100dvh - var(--nav-height));
+    height: 100vh;
+    height: 100dvh;
     flex-direction: column;
     background-color: var(--color-bg-deep);
-    padding: var(--space-xl) var(--space-md) var(--space-md);
-    gap: 0;
+    padding: calc(var(--nav-height) + var(--space-lg)) var(--space-md) var(--space-md);
+    gap: var(--space-md);
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     align-items: flex-start;
-    z-index: 99;
+    z-index: 90;
     overflow-y: auto;
   }
 
   .nav-links[data-open="true"] {
     transform: translateX(0);
-  }
-
-  .nav-links > li:not(.nav-menu-footer) {
-    margin-bottom: var(--space-md);
   }
 
   .nav-links a {
@@ -474,55 +463,9 @@ a:hover {
   .nav-links[data-open="true"] li:nth-child(3) a {
     animation: menu-item-in 0.55s cubic-bezier(0.215, 0.61, 0.355, 1) 0.35s forwards;
   }
-  .nav-links[data-open="true"] li.nav-menu-footer {
-    animation: menu-footer-in 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.55s forwards;
-  }
-
-  /* メニューフッター (email + copyright) */
-  .nav-menu-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
-    margin-top: auto;
-    padding-top: var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    width: 100%;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .nav-menu-footer a {
-    font-size: 0.9375rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.75);
-    letter-spacing: 0.04em;
-    text-transform: none;
-  }
-
-  .nav-menu-footer a::after {
-    display: none;
-  }
-
-  .nav-menu-footer a:hover {
-    color: var(--color-text-light);
-  }
-
-  .nav-menu-footer span {
-    font-family: var(--font-en);
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.4);
-  }
 }
 
 @keyframes menu-item-in {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes menu-footer-in {
   to {
     opacity: 1;
     transform: translateY(0);
