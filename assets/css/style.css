@@ -412,7 +412,8 @@ a:hover {
     display: block;
   }
 
-  .nav.menu-open .nav-toggle-bar,
+  /* 中央バーは aria-expanded=true で透明化するので、白色化は ::before/::after のみ
+     (両方適用すると × の中央に水平線が残る) */
   .nav.menu-open .nav-toggle-bar::before,
   .nav.menu-open .nav-toggle-bar::after {
     background-color: var(--color-text-light);
@@ -432,9 +433,16 @@ a:hover {
     gap: var(--space-md);
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     z-index: 90;
     overflow-y: auto;
+  }
+
+  /* 中央寄せメニューのアンダーラインを中央から展開 */
+  .nav-links a::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .nav-links[data-open="true"] {
@@ -870,23 +878,80 @@ a:hover {
 }
 
 .home-service-card {
-  padding: var(--space-lg);
+  position: relative;
+  padding: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  min-height: clamp(220px, 28vw, 300px);
+  color: var(--color-text-light);
+  background-color: var(--color-bg-deep);
 }
 
-.home-service-card h3 {
+.home-service-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.home-service-card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.home-service-card:hover .home-service-card-bg img {
+  transform: scale(1.05);
+}
+
+.home-service-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.60) 0%,
+    rgba(0, 0, 0, 0.35) 50%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+.home-service-card-body {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 4vw, 44px) var(--space-lg) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.home-service-card-body .section-label {
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.home-service-card-body h3 {
+  color: var(--color-text-light);
   margin-bottom: var(--space-sm);
 }
 
-.home-service-card p {
-  color: var(--color-text-muted);
+.home-service-card-body p {
+  color: rgba(255, 255, 255, 0.88);
   margin-bottom: var(--space-md);
+  line-height: 1.7;
 }
 
-.home-service-card .btn-ghost {
-  margin-top: auto;
+.home-service-card-body .btn-ghost {
+  color: var(--color-text-light);
+  margin-top: 0;
   align-self: flex-start;
+}
+
+.home-service-card-body .btn-ghost:hover {
+  color: var(--color-accent);
 }
 
 /* === CONSULTING / PRODUCTS / ABOUT 共通 === */
