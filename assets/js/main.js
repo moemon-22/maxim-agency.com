@@ -1,21 +1,23 @@
 (() => {
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
+  const navEl = document.querySelector('.nav');
 
   if (navToggle && navLinks) {
+    const setMenuState = (open) => {
+      navToggle.setAttribute('aria-expanded', String(open));
+      navLinks.setAttribute('data-open', String(open));
+      if (navEl) navEl.classList.toggle('menu-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!expanded));
-      navLinks.setAttribute('data-open', String(!expanded));
-      document.body.style.overflow = !expanded ? 'hidden' : '';
+      setMenuState(!expanded);
     });
 
     navLinks.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        navToggle.setAttribute('aria-expanded', 'false');
-        navLinks.setAttribute('data-open', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', () => setMenuState(false));
     });
   }
 

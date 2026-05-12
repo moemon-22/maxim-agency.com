@@ -385,11 +385,37 @@ a:hover {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+/* モバイルメニューフッター (デスクトップでは非表示) */
+.nav-menu-footer {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav-toggle {
     display: inline-flex;
   }
 
+  /* ナビ上部もメニュー開時にダーク化 */
+  .nav.menu-open {
+    background-color: var(--color-bg-deep);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav.menu-open .nav-logo .logo-default {
+    display: none;
+  }
+
+  .nav.menu-open .nav-logo .logo-on-hero {
+    display: block;
+  }
+
+  .nav.menu-open .nav-toggle-bar,
+  .nav.menu-open .nav-toggle-bar::before,
+  .nav.menu-open .nav-toggle-bar::after {
+    background-color: var(--color-text-light);
+  }
+
+  /* ダーク・フルスクリーン メニュー */
   .nav-links {
     position: fixed;
     top: var(--nav-height);
@@ -400,11 +426,11 @@ a:hover {
     height: calc(100vh - var(--nav-height));
     height: calc(100dvh - var(--nav-height));
     flex-direction: column;
-    background-color: var(--color-bg);
-    padding: var(--space-lg) var(--space-md);
-    gap: var(--space-md);
+    background-color: var(--color-bg-deep);
+    padding: var(--space-xl) var(--space-md) var(--space-md);
+    gap: 0;
     transform: translateX(100%);
-    transition: transform var(--transition);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     align-items: flex-start;
     z-index: 99;
     overflow-y: auto;
@@ -414,8 +440,92 @@ a:hover {
     transform: translateX(0);
   }
 
+  .nav-links > li:not(.nav-menu-footer) {
+    margin-bottom: var(--space-md);
+  }
+
   .nav-links a {
-    font-size: 1.25rem;
+    font-size: clamp(2rem, 8vw, 2.75rem);
+    font-weight: 500;
+    color: var(--color-text-light);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .nav-links a::after {
+    background-color: var(--color-accent);
+    height: 2px;
+    bottom: -6px;
+  }
+
+  .nav-links a[aria-current="page"]::after {
+    width: 100%;
+  }
+
+  /* スタガーアニメ: 開時に各アイテムが順次フェードアップ */
+  .nav-links[data-open="true"] li:nth-child(1) a {
+    animation: menu-item-in 0.55s cubic-bezier(0.215, 0.61, 0.355, 1) 0.15s forwards;
+  }
+  .nav-links[data-open="true"] li:nth-child(2) a {
+    animation: menu-item-in 0.55s cubic-bezier(0.215, 0.61, 0.355, 1) 0.25s forwards;
+  }
+  .nav-links[data-open="true"] li:nth-child(3) a {
+    animation: menu-item-in 0.55s cubic-bezier(0.215, 0.61, 0.355, 1) 0.35s forwards;
+  }
+  .nav-links[data-open="true"] li.nav-menu-footer {
+    animation: menu-footer-in 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.55s forwards;
+  }
+
+  /* メニューフッター (email + copyright) */
+  .nav-menu-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin-top: auto;
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .nav-menu-footer a {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  .nav-menu-footer a::after {
+    display: none;
+  }
+
+  .nav-menu-footer a:hover {
+    color: var(--color-text-light);
+  }
+
+  .nav-menu-footer span {
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes menu-item-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-footer-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
